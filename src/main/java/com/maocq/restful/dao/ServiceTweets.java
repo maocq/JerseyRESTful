@@ -5,6 +5,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+//import javax.persistence.Query;
 
 import com.maocq.restful.model.Tweet;
 
@@ -18,9 +19,14 @@ public class ServiceTweets implements ServiceTweetsDAO {
 	public List<Tweet> all() {
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("PersistenceJersey");
 		EntityManager manager = emf.createEntityManager();
-
+		
 		List<Tweet> tweets = (List<Tweet>) manager.createQuery("SELECT t FROM Tweet t").getResultList();
 		// System.out.println("Numero de usuarios: " + tweets.size());
+		
+		/*
+		 * Query query = manager.createNativeQuery("SELECT * FROM TWEETS",
+		 * "Tweet"); List<Tweet> tweets2 = (List<Tweet>) query.getResultList();
+		 */
 
 		manager.close();
 		emf.close();
